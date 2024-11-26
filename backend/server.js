@@ -4,10 +4,10 @@ const dotenv = require('dotenv');
 const sequelize = require('./config/database'); // Importando a configuração do Sequelize
 const authRoutes = require('./routes/authRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
-const { Usuario } = require('./models/usuarioModel');
+const { Usuario } = require('./models/userModel');
 
 
-sequelize.sync({ force: false })  // force: false para não apagar os dados existentes
+sequelize.sync({ alter: false })  // force: false para não apagar os dados existentes
     .then(() => {
         console.log('Banco de dados sincronizado!');
     })

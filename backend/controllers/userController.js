@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/userModel');
+const { Usuario } = require('../models/userModel'); // Importando corretamente o modelo 'Usuario'
 
 // Registrar um novo usuário
 const registerUser = async (req, res) => {
@@ -8,7 +8,7 @@ const registerUser = async (req, res) => {
     const { nome, email, senha, tipo } = req.body;
 
     // Verifica se o email já existe
-    const userExist = await User.findOne({ where: { email } });
+    const userExist = await Usuario.findOne({ where: { email } });  // Usando 'Usuario' aqui
     if (userExist) {
       return res.status(400).json({ error: 'Email já cadastrado!' });
     }
@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
     const hashedPassword = bcrypt.hashSync(senha, 10);
 
     // Cria o novo usuário
-    const newUser = await User.create({
+    const newUser = await Usuario.create({  // Usando 'Usuario' aqui
       nome,
       email,
       senha: hashedPassword,
@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
   const { email, senha } = req.body;
   try {
     // Verifica se o usuário existe
-    const user = await User.findOne({ where: { email } });
+    const user = await Usuario.findOne({ where: { email } });  // Usando 'Usuario' aqui
 
     if (!user) {
       return res.status(400).json({ error: 'Usuário não encontrado!' });
