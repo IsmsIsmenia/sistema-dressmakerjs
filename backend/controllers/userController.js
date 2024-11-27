@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Usuario } = require('../models/userModel'); // Importando corretamente o modelo 'Usuario'
+const express = require('express');
+
 
 // Registrar um novo usuário
 const registerUser = async (req, res) => {
@@ -47,20 +49,18 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, senha } = req.body;
   try {
-    // Verifica se o usuário existe
-    const user = await Usuario.findOne({ where: { email } });  // Usando 'Usuario' aqui
+    const user = await Usuario.findOne({ where: { email } });
 
     if (!user) {
       return res.status(400).json({ error: 'Usuário não encontrado!' });
     }
 
-    // Verifica a senha
-    const isPasswordValid = bcrypt.compareSync(senha, user.senha);
+    // Verifica a senha com await
+    const isPasswordValid = await bcrypt.compare(senha, user.senha);
     if (!isPasswordValid) {
       return res.status(400).json({ error: 'Senha incorreta!' });
     }
 
-    // Gerar um token de autenticação
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     return res.status(200).json({
@@ -78,6 +78,7 @@ const loginUser = async (req, res) => {
     res.status(500).json({ error: 'Erro no login!' });
   }
 };
+
 
 module.exports = {
   registerUser,
