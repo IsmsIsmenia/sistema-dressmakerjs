@@ -7,6 +7,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const { Usuario } = require('./models/userModel');
 
 
+
 sequelize.sync({ alter: false })  // force: false para não apagar os dados existentes
     .then(() => {
         console.log('Banco de dados sincronizado!');
@@ -30,7 +31,7 @@ sequelize.authenticate()
   .then(() => console.log('Conexão com o banco de dados bem-sucedida.'))
   .catch(err => console.log('Erro ao conectar ao banco de dados:', err));
 
-  app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 // Iniciar o Servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
