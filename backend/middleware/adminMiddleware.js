@@ -1,11 +1,8 @@
-const adminMiddleware = (req, res, next) => { 
-    // Verifica se o usuário tem a permissão 'admin'
-    if (req.userRole !== 'administrador') {
-      return res.status(403).json({ error: 'Acesso negado' });
-    }
-    // Se for admin, deixa continuar
-    next();
-  };
-  
-  module.exports = adminMiddleware;
-  
+const adminMiddleware = (req, res, next) => {
+  if (req.userRole !== 'administrador') {  // Verifique se o valor corresponde exatamente
+    return res.status(403).json({ error: 'Acesso negado' });
+  }
+  next();  // Se for administrador, permite continuar
+};
+
+module.exports = adminMiddleware;

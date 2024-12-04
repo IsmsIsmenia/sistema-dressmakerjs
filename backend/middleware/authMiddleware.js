@@ -1,23 +1,19 @@
+const jwt = require('jsonwebtoken');
+
 const authMiddleware = (req, res, next) => {
-  console.log('Headers recebidos:', req.headers);
-
-  const authHeader = req.headers['authorization'];
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Token não fornecido' });
-  }
-
-  const token = authHeader.split(' ')[1];
+  const token = req.header('Authorization')?.split(' ')[1]; // Isso vai pegar o token após "Bearer"
   if (!token) {
-    return res.status(401).json({ message: 'Token ausente ou malformado' });
+    return res.status(401).json({ error: 'Acesso negado. Nenhum token fornecido.' });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Token decodificado:', decoded);
-    req.user = decoded;
+    req.userId = decoded.id; // Adiciona o ID do usuário no request
+    req.userRole = decoded.role; // Adiciona o papel (role) do usuário no request
     next();
-  } catch (error) {
-    console.error('Erro na validação do token:', error);
-    return res.status(403).json({ message: 'Token inválido' });
+  } catch (err) {
+    res.status(400).json({ error: 'Token inválido.' });
   }
 };
+
+module.exports = authMiddleware;

@@ -1,23 +1,22 @@
+const dotenv = require('dotenv');
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const sequelize = require('./config/database'); // Importando a configuração do Sequelize
 const authRoutes = require('./routes/authRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 const { Usuario } = require('./models/userModel');
 
 
+// Carregar as variáveis de ambiente do arquivo .env
+dotenv.config();
+
+const app = express();
 
 sequelize.sync({ alter: false })  // force: false para não apagar os dados existentes
     .then(() => {
         console.log('Banco de dados sincronizado!');
     })
     .catch(err => console.log('Erro ao sincronizar banco de dados: ', err));
-
-// Carregar as variáveis de ambiente do arquivo .env
-dotenv.config();
-
-const app = express();
 
 app.get('/protected', authMiddleware, (req, res) => {
   res.send('Esta rota é protegida!');
