@@ -1,7 +1,10 @@
+// erroglobalMiddleware.js
 const errorHandler = (err, req, res, next) => {
-    console.error(err.stack); // Log do erro
-    res.status(500).json({ error: 'Algo deu errado!' });
-  };
+  // Log do erro
+  console.error(err.stack); 
   
-  app.use(errorHandler); // Adicionar no final de todas as rotas
-  
+  // Resposta padrão de erro
+  res.status(500).json({ error: 'Algo deu errado!' });
+};
+
+module.exports = errorHandler;

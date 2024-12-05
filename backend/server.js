@@ -5,6 +5,7 @@ const sequelize = require('./config/database'); // Importando a configuração d
 const authRoutes = require('./routes/authRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 const { Usuario } = require('./models/userModel');
+const erroGlobalMiddleware = require('./middleware/erroglobalMiddeware');
 
 
 // Carregar as variáveis de ambiente do arquivo .env
@@ -40,3 +41,4 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('Servidor está funcionando!');
 });
+app.use(erroGlobalMiddleware);
