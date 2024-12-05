@@ -6,7 +6,7 @@ const { registerValidation } = require('../validations/userValidation');
 
 
 // Registrar um novo usuário
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
   try {
     // Valida os dados do corpo da requisição
     const { error } = registerValidation.validate(req.body);

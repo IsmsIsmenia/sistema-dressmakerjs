@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 // Validação para registro de usuário
-const registerSchema = Joi.object({
+const registerValidation = Joi.object({
   nome: Joi.string().min(3).max(50).required(),
   email: Joi.string().email().required(),
   senha: Joi.string().min(6).required(),
@@ -14,4 +14,4 @@ const loginSchema = Joi.object({
   senha: Joi.string().min(6).required(),
 });
 
-module.exports = { registerSchema, loginSchema };
+module.exports = { registerValidation, loginSchema };
