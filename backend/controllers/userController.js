@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { Usuario } = require('../models/userModel'); // Importando corretamente o modelo 'Usuario'
 const express = require('express');
 const { registerValidation } = require('../validations/userValidation');
+const { use } = require('../routes/authRoutes');
 
 
 // Registrar um novo usuário
@@ -95,8 +96,70 @@ const loginUser = async (req, res) => {
   }
 };
 
+//CRUD - READ 
+const getUsers = async (res, req, next) => {
+  try{
+    const users = await Usuario.findAll();
+    res.json(users);
+  }catch (err) {
+    next(err)
+  }
+};
+
+//CRUD - READ específico
+const getUserById = async (req, res, next) =>{
+  const { id } = req.params;
+  try {
+    const user = await Usuario.findByPk(id);
+    if (!user){
+      return res.status(404).json({ message: 'Usuário não encontrado'});
+    }
+    res.json(user);
+  }catch (err) {
+    next(err);
+  }
+};
+
+//CRUD - UPDATE
+const updateUser = async (req, res, next) => {
+  const { id } = req.params;
+  const { nome, email } = req.body;
+  try {
+    const user = await Usuario.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado'});
+    }
+
+    await user.update({nome, email});
+    res.json(user);
+  }catch (err) {
+    next(err)
+  }
+};
+
+//CRUD - DELETE
+const deleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  try{
+    const user = await Usuario.findByPk(id);
+    if(!user){
+      return.res.status(404).json({ message: 'Usuário não encontrado'});
+    }
+
+    await user.destroy();
+    res.status(204).send();
+  } catch (err){
+    next (err);
+  }
+};
+
+
 
 module.exports = {
   registerUser,
   loginUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser
 };
