@@ -97,7 +97,7 @@ const loginUser = async (req, res) => {
 };
 
 //CRUD - READ 
-const getUsers = async (res, req, next) => {
+const getUsers = async (req, res, next) => {
   try{
     const users = await Usuario.findAll();
     res.json(users);
@@ -147,7 +147,7 @@ const deleteUser = async (req, res, next) => {
     }
 
     await user.destroy();
-    res.status(204).send();
+    res.status(200).json({ message: 'Usuário excluído com sucesso!' });
   } catch (err){
     next (err);
   }

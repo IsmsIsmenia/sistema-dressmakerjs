@@ -34,7 +34,7 @@ app.use(express.json());
 setupSwagger(app);
 
 // Rotas
-app.get('/', (req, res) => {
+app.get('/serve', (req, res) => {
   res.send('Servidor está funcionando!');
 });
 app.use('/auth', authRoutes);
