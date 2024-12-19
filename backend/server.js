@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 const erroGlobalMiddleware = require('./middleware/erroglobalMiddeware');
 const setupSwagger = require('./config/swagger'); // Swagger para documentação da API
+const { Pedido } = require('./models/pedidosModel');
 
 // Carregar as variáveis de ambiente do arquivo .env
 dotenv.config();
@@ -16,7 +17,7 @@ const app = express();
 
 // Configuração do banco de dados
 sequelize
-  .sync({ alter: false }) // force: false para preservar dados
+  .sync({ alter: true }) // force: false para preservar dados
   .then(() => console.log('Banco de dados sincronizado!'))
   .catch(err => console.log('Erro ao sincronizar banco de dados:', err));
 
