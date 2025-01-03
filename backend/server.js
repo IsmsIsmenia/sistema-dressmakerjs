@@ -8,6 +8,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const erroGlobalMiddleware = require('./middleware/erroglobalMiddeware');
 const setupSwagger = require('./config/swagger'); // Swagger para documentação da API
 const { Pedido } = require('./models/pedidosModel');
+const pedidosRoutes = require('./routes/pedidosRoutes');
 
 // Carregar as variáveis de ambiente do arquivo .env
 dotenv.config();
@@ -39,6 +40,7 @@ app.get('/serve', (req, res) => {
   res.send('Servidor está funcionando!');
 });
 app.use('/auth', authRoutes);
+app.use('/pedidos', pedidosRoutes);
 
 // Rota protegida de exemplo
 app.get('/protected', authMiddleware, (req, res) => {
