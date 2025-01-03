@@ -28,6 +28,14 @@ const Pedido = sequelize.define('Pedido', {
         type:DataTypes.STRING,
         allowNull:true,
     },
+    usuarioId: { // Defina a chave estrangeira
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'usuarios', // Nome da tabela de usuários no banco de dados
+            key: 'id',         // Chave primária da tabela de usuários
+        },
+    },
 }, {
     tableName: 'pedidos',
     freezeTableName: true,
