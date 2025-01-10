@@ -19,3 +19,12 @@ const criarPedido = async (req, res) => {
         res.status(500).json({ message: 'Erro ao criar Pedido!', error : error.message});
     }
 };
+
+const listarPedidos = async (req, res) => {
+    try{
+        const pedidos = await Pedido.findAll();
+        res.status(200).json(pedidos);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao listar pedidos', error : error.message});
+    }
+};
