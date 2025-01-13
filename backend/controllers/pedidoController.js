@@ -28,3 +28,18 @@ const listarPedidos = async (req, res) => {
         res.status(500).json({ message: 'Erro ao listar pedidos', error : error.message});
     }
 };
+
+const buscarPedido = async (req, res) => {
+    try{
+        const {id} = req.params;
+
+        const pedido = await Pedido.findByPk(id);
+
+        if (!pedido) {
+            res.status(404).json({ message:'Pedido não encontrado'});
+        }
+        res.status(200).json(pedido);
+    }catch(error) {
+        res.status(500).json({ message: 'Erro ao buscar pedido', error: error.message});
+    }
+};
