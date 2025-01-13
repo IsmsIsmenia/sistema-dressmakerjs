@@ -43,3 +43,44 @@ const buscarPedido = async (req, res) => {
         res.status(500).json({ message: 'Erro ao buscar pedido', error: error.message});
     }
 };
+
+const atualizarPedido = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const { descricao, data_pedido, data_etrega, status, valor, observacoes} = req.body;
+
+        const pedido = await Pedido.findByPk(id); 
+
+        if (!pedido){
+            return res.status(404).json({ message: 'Pedido não encontrado'});
+        }
+        await pedido.update({descricao, data_pedido, data_etrega, status, valor, observacoes});
+        res.status(200).json({message: 'Pedido atualizado com sucesso!',pedido})
+
+    }catch (error){
+        res.status(500).json({ message: 'Erro ao atualizar pedido', error: error.message});
+    }
+};
+
+const deletarPedido = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const pedido = await Pedido.findByPk(id);
+
+        if (!pedido){
+            return res.status(404).json({ message: 'Pedido não encontrado'});
+        }
+        await pedido.destroy();
+        res.status(200).json({ message: 'Pedido deletado com sucesso!'});
+    } catch (error){
+        res.status(500).json({message: 'Erro ao deletar pedido', error:error.message});
+    }
+};
+
+ module.exports = {
+    criarPedido,
+    listarPedidos,
+    buscarPedido,
+    atualizarPedido,
+    deletarPedido,
+ };
