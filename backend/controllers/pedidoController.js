@@ -1,6 +1,6 @@
 const {Pedido} = require('../models/pedidosModel');
 
-const criarPedido = async (req, res) => {
+const createPedido = async (req, res) => {
     try {
         const{ descricao, data_pedido, data_etrega, status, valor, observacoes, usuarioId } = req.body;
 
@@ -14,13 +14,13 @@ const criarPedido = async (req, res) => {
             usuarioId,
         });
 
-        res.status(201).json({ message: 'Pedido criado com sucesso!', pedido:novoPedido });
+        res.status(201).json({ message: 'Pedido criado com sucesso!', pedido: novoPedido });
     } catch  (erro) {
         res.status(500).json({ message: 'Erro ao criar Pedido!', error : error.message});
     }
 };
 
-const listarPedidos = async (req, res) => {
+const getPedidos = async (req, res) => {
     try{
         const pedidos = await Pedido.findAll();
         res.status(200).json(pedidos);
@@ -29,7 +29,7 @@ const listarPedidos = async (req, res) => {
     }
 };
 
-const buscarPedido = async (req, res) => {
+const getPedidoById = async (req, res) => {
     try{
         const {id} = req.params;
 
@@ -44,7 +44,7 @@ const buscarPedido = async (req, res) => {
     }
 };
 
-const atualizarPedido = async (req, res) => {
+const updatePedido = async (req, res) => {
     try{
         const {id} = req.params;
         const { descricao, data_pedido, data_etrega, status, valor, observacoes} = req.body;
@@ -62,7 +62,7 @@ const atualizarPedido = async (req, res) => {
     }
 };
 
-const deletarPedido = async (req, res) => {
+const deletePedido = async (req, res) => {
     try{
         const {id} = req.params;
         const pedido = await Pedido.findByPk(id);
@@ -78,9 +78,9 @@ const deletarPedido = async (req, res) => {
 };
 
  module.exports = {
-    criarPedido,
-    listarPedidos,
-    buscarPedido,
-    atualizarPedido,
-    deletarPedido,
+    createPedido,
+    getPedidos,
+    getPedidoById,
+    updatePedido,
+    deletePedido,
  };

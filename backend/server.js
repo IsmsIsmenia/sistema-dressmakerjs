@@ -18,7 +18,7 @@ const app = express();
 
 // Configuração do banco de dados
 sequelize
-  .sync({ alter: true }) // force: false para preservar dados
+  .sync({ alter: false }) // force: false para preservar dados
   .then(() => console.log('Banco de dados sincronizado!'))
   .catch(err => console.log('Erro ao sincronizar banco de dados:', err));
 
