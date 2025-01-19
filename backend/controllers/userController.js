@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Usuario } = require('../models/userModel'); // Importando corretamente o modelo 'Usuario'
+const { Usuario } = require('../models'); // Importando corretamente o modelo 'Usuario'
 const express = require('express');
 const { registerValidation } = require('../validations/userValidation');
 const { use } = require('../routes/authRoutes');

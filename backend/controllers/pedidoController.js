@@ -1,4 +1,4 @@
-const {Pedido} = require('../models/pedidosModel');
+const {Pedido} = require('../models');
 
 const createPedido = async (req, res) => {
     try {
@@ -15,7 +15,7 @@ const createPedido = async (req, res) => {
         });
 
         res.status(201).json({ message: 'Pedido criado com sucesso!', pedido: novoPedido });
-    } catch  (erro) {
+    } catch  (error) {
         res.status(500).json({ message: 'Erro ao criar Pedido!', error : error.message});
     }
 };

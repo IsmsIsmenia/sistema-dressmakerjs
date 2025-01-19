@@ -8,6 +8,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const erroGlobalMiddleware = require('./middleware/erroglobalMiddeware');
 const setupSwagger = require('./config/swagger'); // Swagger para documentação da API
 const { Pedido } = require('./models/pedidosModel');
+const {Usuario} = require('./models/userModel');
 const pedidosRoutes = require('./routes/pedidosRoutes');
 
 // Carregar as variáveis de ambiente do arquivo .env

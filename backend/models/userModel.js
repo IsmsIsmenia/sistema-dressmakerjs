@@ -1,8 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Pedido = require('./pedidosModel');
-
-
 
 const Usuario = sequelize.define('Usuario', {
   nome: {
@@ -27,7 +24,5 @@ const Usuario = sequelize.define('Usuario', {
   freezeTableName: true,
   timestamps: true,
 });
-Usuario.hasMany(Pedido, { foreignKey: 'usuarioId' });
-Pedido.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 
-module.exports = { Usuario };
+module.exports = Usuario;
