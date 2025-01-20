@@ -15,7 +15,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/authRoutes.js'], // Ajuste o caminho conforme necessário
+  apis: ['./routes/authRoutes.js', './routes/userRoutes.js', './routes/pedidosRoutes.js'],
 };
 
 const swaggerSpec = swaggerJsDoc(options);
