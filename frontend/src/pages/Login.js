@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../components/login/Login.css';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,14 +28,14 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+    <div className="login-background">
+      <div className="login-form">
         <h2 className="text-2xl font-bold text-center text-gray-700">Login</h2>
         <form onSubmit={handleLogin} className="mt-6">
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className="inputBox">
+            <div className="inputBox">
               Email
-            </label>
+            </div>
             <input
               type="email"
               value={email}
@@ -42,7 +44,7 @@ const Login = () => {
               className="w-full px-4 py-2 mt-2 text-sm border rounded-lg focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
             />
           </div>
-          <div className="mb-4">
+          <div className="inputBox">
             <label className="block text-sm font-medium text-gray-700">
               Senha
             </label>
@@ -68,7 +70,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-  );
+  );  
 };
 
 export default Login;
