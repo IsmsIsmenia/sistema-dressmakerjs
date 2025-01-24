@@ -33,40 +33,41 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center text-gray-700">Login</h2>
         <form onSubmit={handleLogin} className="mt-6">
           <div className="inputBox">
-            <div className="inputBox">
-              Email
-            </div>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-4 py-2 mt-2 text-sm border rounded-lg focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
+              placeholder="Email"
             />
           </div>
           <div className="inputBox">
-            <label className="block text-sm font-medium text-gray-700">
-              Senha
-            </label>
             <input
               type="password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
               className="w-full px-4 py-2 mt-2 text-sm border rounded-lg focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
+              placeholder="Senha"
             />
           </div>
+          <div className="inputBox">
+            <input
+              type="submit"
+              value="Login"
+              id="btn"
+            />
+          </div>
+          <div class="group">
+                <a href="#">Esqueceu a Senha?</a>
+                <a href="#">Cadastre-se</a>
+            </div>
           {erro && (
             <p className="text-sm text-red-600 mb-4">
               {erro}
             </p>
           )}
-          <button
-            type="submit"
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-          >
-            Entrar
-          </button>
         </form>
       </div>
     </div>

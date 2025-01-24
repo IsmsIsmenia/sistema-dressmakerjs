@@ -4,11 +4,47 @@
     background-position: center;
     height: 100vh;
     display: flex;
-    justify-content: flex-end; /* Move o conteúdo para a direita */
-    align-items: center;
-    padding-right: 50px; /* Adiciona um espaço da borda direita */
+    justify-content: center; /* Move o conteúdo para a direita */
+    align-items: flex-end;
+    padding-right: 100px; /* Adiciona um espaço da borda direita */
+   
+}
+/* Ajustes para telas pequenas */
+@media (max-width: 768px) {
+    .login-background {
+        background-position: center top; /* Ajusta para mostrar mais da parte superior (onde está a máquina) */
+        padding-right: 20px; /* Ajusta o padding para não ficar muito apertado */
+        padding: 10px;
+        align-items: center;
+    }
+
+    .login-form {
+        width: 90%; /* Reduz a largura do formulário para melhor adaptação */
+        padding: 30px; /* Ajusta o espaçamento interno */
+    }
 }
 
+/* Ajustes para telas muito pequenas (por exemplo, dispositivos móveis) */
+@media (max-width: 480px) {
+    .login-form {
+        width: 95%; /* Torna o formulário ainda mais estreito */
+        padding: 20px;
+        gap: 15px; /* Reduz o espaçamento entre os campos */
+    }
+
+    .login-form input, .login-form button {
+        font-size: 14px; /* Ajusta o tamanho da fonte para melhor legibilidade */
+        padding: 10px; /* Ajusta o espaçamento interno dos campos */
+    }
+
+    .login-form a {
+        font-size: 12px; /* Texto menor para links */
+    }
+
+    .login-background {
+        background-position: center center; /* Mostra mais da área central da imagem */
+    }
+}
 .login-form {
     background-color: rgba(255, 255, 255, 0.35); /* Transparência com fundo branco */
     padding: 60px; /* Aumenta o espaçamento interno */
@@ -21,6 +57,7 @@
     backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     border-right: 1px solid rgba(255, 255, 255, 0.5);
+    gap: 20px;
 }
 
 .login-form h2{
@@ -34,9 +71,11 @@
     
 }
 
-.login-form .inputBox{
-    position: relative;
-} 
+.login-form .inputBox {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centraliza o botão horizontalmente */
+}
 
 .login-form .inputBox input{
     position: relative;
@@ -44,7 +83,7 @@
     padding: 15px 20px;
     outline: none;
     font-size: 1.25em;
-    color: #8f2c24;
+    color: #5D6952;
     border-radius: 5px;
     background: #fff;
     border: none;
@@ -52,14 +91,14 @@
 }
 
 .login-form .inputBox ::placeholder{
-    color: #8f2c24;
+    color: #5D6952;
 }
 
 .login-form .inputBox #btn{
     position: relative;
     border: none;
     outline: none;
-    background: #8f2c24;
+    background: #5D6952;
     color: #fff;
     cursor: pointer;
     font-size: 1.25em;
@@ -68,7 +107,7 @@
 }
 
 .login-form .inputBox #btn:hover{
-    background: #d64c42;
+    background: #b3b796;
 }
 
 .login-form .group{
@@ -78,7 +117,7 @@
 
 .login-form .group a{
     font-size: 1.25em;
-    color: #8f2c24;
+    color: #5D6952;
     font-weight: 500;
     text-decoration: none;
 }
