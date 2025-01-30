@@ -22,6 +22,17 @@
         width: 90%; /* Reduz a largura do formulário para melhor adaptação */
         padding: 30px; /* Ajusta o espaçamento interno */
     }
+    .login-form h2 {
+        font-size: 1.75em; /* Reduz o tamanho do título */
+    }
+
+    .login-form .inputBox input {
+        font-size: 1em; /* Ajusta os inputs */
+    }
+
+    .login-form .group a {
+        font-size: 0.9em; /* Reduz um pouco os links */
+    }
 }
 
 /* Ajustes para telas muito pequenas (por exemplo, dispositivos móveis) */
@@ -33,7 +44,7 @@
     }
 
     .login-form input, .login-form button {
-        font-size: 14px; /* Ajusta o tamanho da fonte para melhor legibilidade */
+        font-size: 0.9em; /* Ajusta o tamanho da fonte para melhor legibilidade */
         padding: 10px; /* Ajusta o espaçamento interno dos campos */
     }
 
@@ -43,6 +54,20 @@
 
     .login-background {
         background-position: center center; /* Mostra mais da área central da imagem */
+    }
+    .login-form h2 {
+        font-size: 1.5em;
+    }
+    .group {
+        flex-direction: column;
+        align-items: center; /* Centraliza os links */
+        text-align: center;
+    }
+
+    .group a {
+        display: block; /* Faz cada link ocupar uma linha inteira */
+        margin-top: 5px; /* Espaço entre os links */
+        font-size: 0.85em;
     }
 }
 .login-form {
@@ -117,6 +142,7 @@
 .login-form .group{
     display: flex;
     justify-content: space-between;
+    gap: 10px; 
 }
 
 .login-form .group a{
