@@ -4,11 +4,11 @@
     background-position: center;
     height: 100vh;
     display: flex;
-    justify-content: center; /* Move o conteúdo para a direita */
-    align-items: flex-end;
-    padding-right: 100px; /* Adiciona um espaço da borda direita */
-   
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 20px; /* Evita que o conteúdo encoste nas bordas */
 }
+
 /* Ajustes para telas pequenas */
 @media (max-width: 768px) {
     .login-background {
@@ -58,6 +58,10 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     border-right: 1px solid rgba(255, 255, 255, 0.5);
     gap: 20px;
+    max-width: 90%; /* Em vez de largura fixa, usa porcentagem */
+    max-height: 90vh; /* Garante que o formulário nunca fique maior que a tela */
+    overflow-y: auto; /* Adiciona rolagem se necessário */
+    padding: 40px; /* Ajusta espaçamento interno */
 }
 
 .login-form h2{
