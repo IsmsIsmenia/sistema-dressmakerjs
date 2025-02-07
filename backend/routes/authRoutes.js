@@ -6,6 +6,7 @@ const { getUsers, updateUser, deleteUser } = require('../controllers/userControl
 const { registerUser, loginUser } = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const bruteForceMiddleware = require('../middlewares/bruteForce');
 const router = express.Router();
 
 
@@ -67,7 +68,7 @@ router.post('/register', registerUser);
  *       401:
  *         description: Credenciais inválidas.
  */
-router.post('/login', loginUser);
+router.post('/login',bruteForceMiddleware, loginUser);
 
 /**
  * @swagger
