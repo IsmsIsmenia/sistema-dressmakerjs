@@ -5,14 +5,13 @@ const express = require('express');
 const { registerValidation } = require('../validations/userValidation');
 const { use } = require('../routes/authRoutes');
 
-
 // Registrar um novo usuário
 const registerUser = async (req, res, next) => {
   try {
     // Valida os dados do corpo da requisição
     const { error } = registerValidation.validate(req.body);
     if (error) {
-      return res.status(400).json({ error: error.details[0].message }); // Retorna o erro da validação
+      return res.status(400).json({ error: error.details[0].message });
     }
 
     const { nome, email, senha, tipo } = req.body;
@@ -23,22 +22,22 @@ const registerUser = async (req, res, next) => {
       return res.status(400).json({ error: 'Email já cadastrado!' });
     }
 
-    // Criptografa a senha
-    const hashedPassword = bcrypt.hashSync(senha, 10);
+    // Criptografa a senha de forma assíncrona
+    const hashedPassword = await bcrypt.hash(senha, 10);
 
     // Cria o novo usuário
     const newUser = await Usuario.create({
       nome,
       email,
       senha: hashedPassword,
-      tipo: tipo || 'cliente', // Define tipo padrão
+      tipo: tipo || 'cliente',
     });
 
     // Gera um token de autenticação
     const token = jwt.sign(
       { id: newUser.id, email: newUser.email, role: newUser.tipo },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '2h' }
     );
 
     return res.status(201).json({
@@ -67,27 +66,24 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ error: 'Usuário não encontrado!' });
     }
 
-    // Verifica a senha com await
     const isPasswordValid = await bcrypt.compare(senha, user.senha);
     if (!isPasswordValid) {
       return res.status(400).json({ error: 'Senha incorreta!' });
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.tipo },  // Incluindo o tipo/role
+      { id: user.id, email: user.email, role: user.tipo },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '2h' }
     );
-    
+
+    // Removendo a senha antes de retornar o usuário
+    const userWithoutPassword = { ...user.toJSON() };
+    delete userWithoutPassword.senha;
 
     return res.status(200).json({
       message: 'Login bem-sucedido!',
-      user: {
-        id: user.id,
-        nome: user.nome,
-        email: user.email,
-        tipo: user.tipo,
-      },
+      user: userWithoutPassword,
       token,
     });
   } catch (err) {
@@ -98,24 +94,31 @@ const loginUser = async (req, res) => {
 
 //CRUD - READ 
 const getUsers = async (req, res, next) => {
-  try{
+  try {
     const users = await Usuario.findAll();
-    res.json(users);
-  }catch (err) {
-    next(err)
+    const usersWithoutPasswords = users.map(user => {
+      const userData = user.toJSON();
+      delete userData.senha;
+      return userData;
+    });
+    res.json(usersWithoutPasswords);
+  } catch (err) {
+    next(err);
   }
 };
 
 //CRUD - READ específico
-const getUserById = async (req, res, next) =>{
+const getUserById = async (req, res, next) => {
   const { id } = req.params;
   try {
     const user = await Usuario.findByPk(id);
-    if (!user){
-      return res.status(404).json({ message: 'Usuário não encontrado'});
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
     }
-    res.json(user);
-  }catch (err) {
+    const userWithoutPassword = { ...user.toJSON() };
+    delete userWithoutPassword.senha;
+    res.json(userWithoutPassword);
+  } catch (err) {
     next(err);
   }
 };
@@ -123,37 +126,40 @@ const getUserById = async (req, res, next) =>{
 //CRUD - UPDATE
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { nome, email } = req.body;
+  const { nome, email, senha } = req.body;
   try {
     const user = await Usuario.findByPk(id);
     if (!user) {
-      return res.status(404).json({ message: 'Usuário não encontrado'});
+      return res.status(404).json({ message: 'Usuário não encontrado' });
     }
 
-    await user.update({nome, email});
-    res.json(user);
-  }catch (err) {
-    next(err)
+    const updateData = { nome, email };
+    if (senha) {
+      updateData.senha = await bcrypt.hash(senha, 10);
+    }
+
+    await user.update(updateData);
+    res.json({ message: 'Usuário atualizado com sucesso!' });
+  } catch (err) {
+    next(err);
   }
 };
 
 //CRUD - DELETE
 const deleteUser = async (req, res, next) => {
   const { id } = req.params;
-  try{
+  try {
     const user = await Usuario.findByPk(id);
-    if(!user){
-      return res.status(404).json({ message: 'Usuário não encontrado'});
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
     }
 
     await user.destroy();
     res.status(200).json({ message: 'Usuário excluído com sucesso!' });
-  } catch (err){
-    next (err);
+  } catch (err) {
+    next(err);
   }
 };
-
-
 
 module.exports = {
   registerUser,
