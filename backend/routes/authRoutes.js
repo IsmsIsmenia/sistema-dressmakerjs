@@ -6,7 +6,7 @@ const { getUsers, updateUser, deleteUser } = require('../controllers/userControl
 const { registerUser, loginUser } = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
-const bruteForceMiddleware = require('../middlewares/bruteForce');
+const bruteForceMiddleware = require('../middleware/bruteForce');
 const router = express.Router();
 
 

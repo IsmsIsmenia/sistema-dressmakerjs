@@ -8,14 +8,27 @@ const authMiddleware = require('./middleware/authMiddleware');
 const erroGlobalMiddleware = require('./middleware/erroglobalMiddeware');
 const setupSwagger = require('./config/swagger'); // Swagger para documentação da API
 const { Pedido } = require('./models/pedidosModel');
-const {Usuario} = require('./models/userModel');
+const { Usuario } = require('./models/userModel');
 const pedidosRoutes = require('./routes/pedidosRoutes');
+const cookieParser = require('cookie-parser');
 
-// Carregar as variáveis de ambiente do arquivo .env
+// Carregar variáveis de ambiente
 dotenv.config();
 
 // Instância do Express
 const app = express();
+
+// Middleware para interpretar cookies antes das rotas
+app.use(cookieParser());
+
+// Configuração do CORS para permitir envio de cookies
+app.use(cors({
+  origin: 'http://localhost:3000', // Substituir pela URL do frontend em produção
+  credentials: true, // Permite envio de cookies
+}));
+
+// Middleware para interpretar JSON
+app.use(express.json());
 
 // Configuração do banco de dados
 sequelize
@@ -28,10 +41,6 @@ sequelize
   .authenticate()
   .then(() => console.log('Conexão com o banco de dados bem-sucedida.'))
   .catch(err => console.log('Erro ao conectar ao banco de dados:', err));
-
-// Middlewares globais
-app.use(cors());
-app.use(express.json());
 
 // Configuração do Swagger
 setupSwagger(app);

@@ -13,19 +13,22 @@ const Login = () => {
     e.preventDefault();
     setErro("");
     setShowAlert(false);
-
+  
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        email,
-        senha,
-      });
-
+      const response = await axios.post(
+        "http://localhost:5000/auth/login", // 🔥 Corrigido para bater com a rota correta do backend
+        { email, senha },
+        { withCredentials: true } // Garante que os cookies HTTP-Only sejam usados
+      );
+  
+      // 🚀 O token HTTP-Only já está no cookie, então salvar no localStorage pode ser desnecessário
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         console.log("Token recebido:", response.data.token);
       }
+      
     } catch (err) {
-      if (err.response && err.response.status === 401) {
+      if (err.response?.status === 401) {
         setErro("E-mail ou senha incorretos.");
       } else {
         setErro("Erro ao fazer login. Tente novamente.");
@@ -33,6 +36,7 @@ const Login = () => {
       setShowAlert(true);
     }
   };
+  
 
   return (
     <div className="login-background">

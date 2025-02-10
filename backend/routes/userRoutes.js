@@ -142,5 +142,6 @@ router.put('/:id', authMiddleware, updateUser); // Atualizar usuário por ID
  *         description: Acesso negado. Você não tem permissão para acessar este recurso.
  */
 router.delete('/:id', authMiddleware, deleteUser); // Excluir usuário por ID
+router.post('/logout', logoutUser);
 
 module.exports = router;

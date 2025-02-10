@@ -77,20 +77,37 @@ const loginUser = async (req, res) => {
       { expiresIn: '2h' }
     );
 
+    // Define o cookie HTTP-Only
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // Apenas HTTPS em produção
+      sameSite: 'Strict', // Protege contra CSRF
+      maxAge: 2 * 60 * 60 * 1000 // 2 horas
+    });
+
     // Removendo a senha antes de retornar o usuário
     const userWithoutPassword = { ...user.toJSON() };
     delete userWithoutPassword.senha;
 
     return res.status(200).json({
       message: 'Login bem-sucedido!',
-      user: userWithoutPassword,
-      token,
+      user: userWithoutPassword
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Erro no login!' });
   }
 };
+
+const logoutUser = (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'Strict'
+  });
+  res.status(200).json({ message: 'Logout realizado com sucesso!' });
+};
+
 
 //CRUD - READ 
 const getUsers = async (req, res, next) => {
@@ -164,6 +181,7 @@ const deleteUser = async (req, res, next) => {
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
   getUsers,
   getUserById,
   updateUser,
