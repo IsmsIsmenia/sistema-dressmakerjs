@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
+    console.log("Login realizado. Dados do usuário:", userData);
     setUser(userData);
   };
 
@@ -30,6 +31,10 @@ export const AuthProvider = ({ children }) => {
     await axios.post("http://localhost:5000/auth/logout", {}, { withCredentials: true });
     setUser(null);
   };
+
+  useEffect(() => {
+    console.log("Usuário no contexto:", user);
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, loading, login, logout }}>

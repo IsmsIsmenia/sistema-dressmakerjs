@@ -228,6 +228,8 @@ router.put('/users/:id', updateUser);
  *         description: Erro interno no servidor.
  */
 router.delete('/users/:id', deleteUser);
-
+router.get("/me", authMiddleware, (req, res) => {
+  res.json(req.user); // Retorna os dados do usuário autenticado
+});
 
 module.exports = router;
