@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 // Configuração do CORS para permitir envio de cookies
 app.use(cors({
-  origin: 'http://localhost:3000', // Substituir pela URL do frontend em produção
+  origin: 'http://localhost:3001', // Substituir pela URL do frontend em produção
   credentials: true, // Permite envio de cookies
 }));
 
