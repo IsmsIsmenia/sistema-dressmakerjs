@@ -229,7 +229,10 @@ router.put('/users/:id', updateUser);
  */
 router.delete('/users/:id', deleteUser);
 router.get("/me", authMiddleware, (req, res) => {
-  res.json(req.user); // Retorna os dados do usuário autenticado
+  res.json({
+    id: req.userId,
+    role: req.userRole
+  });
 });
 
 module.exports = router;
