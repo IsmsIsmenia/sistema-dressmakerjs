@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../components/login/Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // Obtendo a função login do contexto
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,15 +21,14 @@ const Login = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:5000/auth/login", // 🔥 Corrigido para bater com a rota correta do backend
+        "http://localhost:5000/auth/login",
         { email, senha },
-        { withCredentials: true } // Garante que os cookies HTTP-Only sejam usados
+        { withCredentials: true }
       );
-  
-      // 🚀 O token HTTP-Only já está no cookie, então salvar no localStorage pode ser desnecessário
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        console.log("Token recebido:", response.data.token);
+
+      if (response.data.user) {
+        login(response.data.user); // Atualiza o estado do usuário no contexto
+        navigate("/home"); // Redireciona para a Home
       }
       
     } catch (err) {
@@ -36,7 +40,6 @@ const Login = () => {
       setShowAlert(true);
     }
   };
-  
 
   return (
     <div className="login-background">

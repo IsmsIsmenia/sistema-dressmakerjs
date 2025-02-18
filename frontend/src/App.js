@@ -9,14 +9,20 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/auth/login" element={<Login />} />
+        {/* Login será acessível em /login */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Redireciona para /login por padrão */}
+        <Route path="/" element={<Login />} />
+
         {/* Rotas protegidas */}
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Route>
       </Routes>
     </Router>
   );
 };
+
 
 export default App;
