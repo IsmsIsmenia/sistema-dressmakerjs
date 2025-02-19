@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/userModel');
-const { getUsers, updateUser, deleteUser } = require('../controllers/userController');
+const { getUsers, updateUser, deleteUser,logoutUser } = require('../controllers/userController');
 const { registerUser, loginUser } = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
@@ -234,5 +234,5 @@ router.get("/me", authMiddleware, (req, res) => {
     role: req.userRole
   });
 });
-
+router.post('/logout', logoutUser);
 module.exports = router;
