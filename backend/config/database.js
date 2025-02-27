@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,  // Host do banco de dados
     dialect: 'mysql',  // Usando MySQL como banco de dados
+    logging: false,
   }
 );
 

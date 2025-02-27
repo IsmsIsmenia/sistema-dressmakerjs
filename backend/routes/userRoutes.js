@@ -1,6 +1,7 @@
 const express = require('express');
 const { getUsers, getUserById, updateUser, deleteUser } = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
+const adminMiddleware = require('../middleware/adminMiddleware');
 const router = express.Router();
 
 /**
@@ -9,34 +10,17 @@ const router = express.Router();
  *   get:
  *     summary: Retorna todos os usuários
  *     tags: [Usuários]
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
  *         description: Lista de usuários.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 1
- *                   nome:
- *                     type: string
- *                     example: João Silva
- *                   email:
- *                     type: string
- *                     example: joao@example.com
- *                   tipo:
- *                     type: string
- *                     example: cliente
  *       401:
- *         description: Não autorizado. Token inválido ou ausente.
+ *         description: Não autorizado.
  *       403:
- *         description: Acesso negado. Você não tem permissão para acessar este recurso.
+ *         description: Acesso negado.
  */
-router.get('/', authMiddleware, getUsers); // Listar todos os usuários
+router.get('/', authMiddleware, adminMiddleware, getUsers); // Listar todos os usuários
 
 /**
  * @swagger
@@ -44,6 +28,8 @@ router.get('/', authMiddleware, getUsers); // Listar todos os usuários
  *   get:
  *     summary: Retorna um usuário pelo ID
  *     tags: [Usuários]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -53,30 +39,13 @@ router.get('/', authMiddleware, getUsers); // Listar todos os usuários
  *           type: integer
  *     responses:
  *       200:
- *         description: Detalhes de um usuário.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: integer
- *                   example: 1
- *                 nome:
- *                   type: string
- *                   example: João Silva
- *                 email:
- *                   type: string
- *                   example: joao@example.com
- *                 tipo:
- *                   type: string
- *                   example: cliente
+ *         description: Detalhes do usuário.
+ *       401:
+ *         description: Não autorizado.
+ *       403:
+ *         description: Acesso negado.
  *       404:
  *         description: Usuário não encontrado.
- *       401:
- *         description: Não autorizado. Token inválido ou ausente.
- *       403:
- *         description: Acesso negado. Você não tem permissão para acessar este recurso.
  */
 router.get('/:id', authMiddleware, getUserById); // Buscar usuário por ID
 
@@ -86,6 +55,8 @@ router.get('/:id', authMiddleware, getUserById); // Buscar usuário por ID
  *   put:
  *     summary: Atualiza um usuário pelo ID
  *     tags: [Usuários]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -106,6 +77,9 @@ router.get('/:id', authMiddleware, getUserById); // Buscar usuário por ID
  *               email:
  *                 type: string
  *                 example: maria@example.com
+ *               tipo:
+ *                 type: string
+ *                 description: Tipo de usuário (admin ou cliente).
  *     responses:
  *       200:
  *         description: Usuário atualizado com sucesso.
@@ -116,7 +90,7 @@ router.get('/:id', authMiddleware, getUserById); // Buscar usuário por ID
  *       403:
  *         description: Acesso negado. Você não tem permissão para acessar este recurso.
  */
-router.put('/:id', authMiddleware, updateUser); // Atualizar usuário por ID
+router.put('/:id', authMiddleware,adminMiddleware, updateUser); // Atualizar usuário por ID
 
 /**
  * @swagger
@@ -124,6 +98,8 @@ router.put('/:id', authMiddleware, updateUser); // Atualizar usuário por ID
  *   delete:
  *     summary: Deleta um usuário pelo ID
  *     tags: [Usuários]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -141,7 +117,6 @@ router.put('/:id', authMiddleware, updateUser); // Atualizar usuário por ID
  *       403:
  *         description: Acesso negado. Você não tem permissão para acessar este recurso.
  */
-router.delete('/:id', authMiddleware, deleteUser); // Excluir usuário por ID
-router.post('/logout', logoutUser);
+router.delete('/:id', authMiddleware, adminMiddleware, deleteUser); // Excluir usuário por ID
 
 module.exports = router;
