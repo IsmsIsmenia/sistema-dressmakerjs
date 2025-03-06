@@ -14,7 +14,6 @@
     .login-background {
         background-position: center top; /* Ajusta para mostrar mais da parte superior (onde está a máquina) */
         padding-right: 20px; /* Ajusta o padding para não ficar muito apertado */
-        padding: 10px;
         align-items: center;
     }
 
@@ -38,7 +37,7 @@
 /* Ajustes para telas muito pequenas (por exemplo, dispositivos móveis) */
 @media (max-width: 480px) {
     .login-form {
-        width: 95%; /* Torna o formulário ainda mais estreito */
+        max-width: 95%; /* Torna o formulário ainda mais estreito */
         padding: 20px;
         gap: 15px; /* Reduz o espaçamento entre os campos */
     }
@@ -78,7 +77,6 @@
     width: 400px; /* Largura maior */
     display: flex;
     flex-direction: column;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(15px); /* Mantém o efeito Glassmorphism */
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     border-right: 1px solid rgba(255, 255, 255, 0.5);
@@ -113,6 +111,7 @@
     position: relative;
     width: 100%;
     padding: 15px 20px;
+    padding-left: 40px;
     outline: none;
     font-size: 1.25em;
     color: #5D6952;
@@ -128,7 +127,7 @@
 }
 
 
-.login-form .inputBox ::placeholder{
+.login-form .inputBox input::placeholder{
     color: #5D6952;
 }
 
@@ -189,7 +188,7 @@
     }
 }
 .error {
-    border: 2px solid red !important;
+    border: 2px solid red;
     background-color: #ffe6e6;
 }
 .inputBox {
@@ -197,7 +196,21 @@
     transform: translateY(10px);
     animation: fadeInInputs 0.6s ease-out forwards;
     animation-delay: 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
+.inputBox .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5D6952;
+    width: 20px;
+    height: 20px;
+}
+
+
 
 @keyframes fadeInInputs {
     from {

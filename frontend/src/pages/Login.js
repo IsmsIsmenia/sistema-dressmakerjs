@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import { InputIcon } from "../components/input";
+import { Mail, Lock } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -54,15 +56,19 @@ const Login = () => {
         )}
 
         <form onSubmit={handleLogin} className="mt-6">
-          <div className="inputBox">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-2 mt-2 text-sm border rounded-lg"
-              placeholder="Email"
-            />
+        <div className="space-y-3">
+          <div className="space-y-2">
+            <div className="inputBox group gap-3 flex items-center">
+            <Mail className="icon" />
+              <input flex-1
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="px-4 py-2 mt-2 text-sm border-none rounded-lg"
+                placeholder="Email"
+              />
+            </div>
           </div>
           <div className="inputBox">
             <input
@@ -70,7 +76,7 @@ const Login = () => {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 text-sm border rounded-lg"
+              className="w-full px-4 py-2 mt-2 text-sm border-none rounded-lg"
               placeholder="Senha"
             />
           </div>
@@ -81,6 +87,7 @@ const Login = () => {
             <a href="#">Esqueceu a Senha?</a>
             <a href="#">Cadastre-se</a>
           </div>
+        </div>
         </form>
       </div>
     </div>
