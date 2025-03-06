@@ -10,7 +10,8 @@ const router = express.Router();
  * /auth/register:
  *   post:
  *     summary: Registra um novo usuário.
- *     tags: [Auth]
+ *     tags: 
+ *       - Auth
  *     requestBody:
  *       required: true
  *       content:
@@ -30,7 +31,7 @@ const router = express.Router();
  *               tipo:
  *                 type: string
  *                 enum: [cliente, admin]
- *                 description: Tipo de usuário (padrão: cliente).
+ *                 description: "Tipo de usuário (padrão: cliente)."
  *     responses:
  *       201:
  *         description: Usuário registrado com sucesso.
@@ -44,7 +45,8 @@ router.post('/register', registerUser);
  * /auth/login:
  *   post:
  *     summary: Realiza login de um usuário.
- *     tags: [Auth]
+ *     tags:
+ *       - Auth
  *     requestBody:
  *       required: true
  *       content:
@@ -71,7 +73,8 @@ router.post('/login',bruteForceMiddleware, loginUser);
  * /auth/me:
  *  get:
  *    summary: Retorna informações do usuário autenticado.
- *    tags: [Auth]
+ *    tags:
+ *      - Auth
  *    security:
  *      - BearerAuth: []
  *    responses: 
@@ -92,7 +95,8 @@ router.get("/me", authMiddleware, (req, res) => {
  * /auth/logout:
  *   post:
  *    summary: Realiza logout do usuário
- *    tags:[Auth]
+ *    tags:
+ *      - Auth
  *    responses:
  *      200:
  *        description: Logout realizado com sucesso.

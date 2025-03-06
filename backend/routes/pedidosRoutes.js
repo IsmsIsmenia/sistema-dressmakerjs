@@ -188,5 +188,6 @@ router.put('/:id', authMiddleware, pedidosValidation, pedidoController.updatePed
  *         description: Não autorizado. Token inválido ou ausente.
  */
 router.delete('/:id', authMiddleware, pedidoController.deletePedido);
+router.get('/pedidostatus', pedidoController.listarPedidos);
 
 module.exports = router;

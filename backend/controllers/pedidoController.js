@@ -1,5 +1,5 @@
 const {Pedido} = require('../models');
-
+const { Op } = require('sequelize');
 const createPedido = async (req, res) => {
     try {
         const{ descricao, data_pedido, data_etrega, status, valor, observacoes, usuarioId } = req.body;
@@ -77,10 +77,53 @@ const deletePedido = async (req, res) => {
     }
 };
 
+const listarPedidos = async (req, res) => {
+    console.log("🌍 Requisição recebida:", req.method, req.url);
+    console.log("🔎 Query params:", req.query);
+
+    try {
+        const { status, dataInicio, dataFim } = req.query;
+
+        // Adicionando logs para debug
+        console.log("🔎 Query recebida:", req.query); // Verifica os parâmetros recebidos
+       
+        const where = {status: "Pendente"};
+
+        if (status) {
+            where.status = status;  
+            console.log("✅ Filtro de status aplicado:", where.status); // Verifica se o filtro está sendo montado
+        }
+
+        if (dataInicio && dataFim) {
+            where.createdAt = {
+                [Op.between]: [new Date(dataInicio), new Date(dataFim)]
+            };
+        } else if (dataInicio) {
+            where.createdAt = {
+                [Op.gte]: new Date(dataInicio)
+            };
+        } else if (dataFim) {
+            where.createdAt = {
+                [Op.lte]: new Date(dataFim)
+            };
+        }
+
+        console.log("🎯 Filtros finais aplicados:", where); // Mostra o filtro final antes da consulta
+
+        const pedidos = await Pedido.findAll({ where });
+
+        return res.json(pedidos);
+    } catch (error) {
+        console.error("❌ Erro ao listar pedidos:", error);
+        return res.status(500).json({ error: "Erro ao buscar pedidos" });
+    }
+};
+
  module.exports = {
     createPedido,
     getPedidos,
     getPedidoById,
     updatePedido,
     deletePedido,
+    listarPedidos,
  };

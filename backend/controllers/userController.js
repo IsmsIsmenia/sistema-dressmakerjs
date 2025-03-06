@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const { Usuario } = require('../models'); // Importando corretamente o modelo 'Usuario'
 const express = require('express');
 const { registerValidation } = require('../validations/userValidation');
-const { use } = require('../routes/authRoutes');
 
 // Registrar um novo usuário
 const registerUser = async (req, res, next) => {
