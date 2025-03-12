@@ -78,7 +78,7 @@ const deletePedido = async (req, res) => {
 };
 
 const listarPedidos = async (req, res) => {
-    console.log("🌍 Requisição recebida:", req.method, req.url);
+    console.log("🌍 Requisição recebida:");
     console.log("🔎 Query params:", req.query);
 
     try {

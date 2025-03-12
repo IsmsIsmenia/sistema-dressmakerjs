@@ -3,6 +3,9 @@ const router = express.Router();
 const pedidoController = require('../controllers/pedidoController');
 const authMiddleware = require('../middleware/authMiddleware'); // Middleware para proteger rotas
 const pedidosValidation = require('../validations/pedidosValidation')
+
+
+router.get('/pedidostatus', pedidoController.listarPedidos);
 /**
  * @swagger
  * tags:
@@ -188,6 +191,6 @@ router.put('/:id', authMiddleware, pedidosValidation, pedidoController.updatePed
  *         description: Não autorizado. Token inválido ou ausente.
  */
 router.delete('/:id', authMiddleware, pedidoController.deletePedido);
-router.get('/pedidostatus', pedidoController.listarPedidos);
+
 
 module.exports = router;
