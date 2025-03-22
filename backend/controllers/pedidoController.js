@@ -87,7 +87,7 @@ const listarPedidos = async (req, res) => {
         // Adicionando logs para debug
         console.log("🔎 Query recebida:", req.query); // Verifica os parâmetros recebidos
        
-        const where = {status: "Pendente"};
+        const where = {};
 
         if (status) {
             where.status = status;  
@@ -95,15 +95,15 @@ const listarPedidos = async (req, res) => {
         }
 
         if (dataInicio && dataFim) {
-            where.createdAt = {
+            where.data_pedido = {
                 [Op.between]: [new Date(dataInicio), new Date(dataFim)]
             };
         } else if (dataInicio) {
-            where.createdAt = {
+            where.data_pedido = {
                 [Op.gte]: new Date(dataInicio)
             };
         } else if (dataFim) {
-            where.createdAt = {
+            where.data_pedido = {
                 [Op.lte]: new Date(dataFim)
             };
         }
