@@ -30,7 +30,7 @@ const Login = () => {
 
       if (response.data.user) {
         login(response.data.user); // Atualiza o estado do usuário no contexto
-        navigate("/home"); // Redireciona para a Home
+        navigate("/homemobile"); // Redireciona para a Home
       }
       
     } catch (err) {
@@ -55,7 +55,7 @@ const Login = () => {
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="mt-6">
+        <form onSubmit={handleLogin} className="">
         <div className="space-y-3">
           <div className="space-y-2">
             <div className="inputBox group gap-3 flex items-center">

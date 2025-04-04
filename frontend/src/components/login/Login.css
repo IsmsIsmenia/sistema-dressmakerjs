@@ -18,8 +18,8 @@
     }
 
     .login-form {
-        width: 90%; /* Reduz a largura do formulário para melhor adaptação */
-        padding: 30px; /* Ajusta o espaçamento interno */
+        width: 100%; /* Reduz a largura do formulário para melhor adaptação */
+        padding: 20px; /* Ajusta o espaçamento interno */
     }
     .login-form h2 {
         font-size: 1.75em; /* Reduz o tamanho do título */
@@ -37,9 +37,9 @@
 /* Ajustes para telas muito pequenas (por exemplo, dispositivos móveis) */
 @media (max-width: 480px) {
     .login-form {
-        max-width: 95%; /* Torna o formulário ainda mais estreito */
         padding: 20px;
-        gap: 15px; /* Reduz o espaçamento entre os campos */
+        gap: 5px; /* Reduz o espaçamento entre os campos */
+        max-width: 380px;
     }
 
     .login-form input, .login-form button {
@@ -71,7 +71,7 @@
 }
 .login-form {
     background-color: rgba(255, 255, 255, 0.35); /* Transparência com fundo branco */
-    padding: 60px; /* Aumenta o espaçamento interno */
+    padding: 30px; /* Aumenta o espaçamento interno */
     border-radius: 12px; /* Bordas arredondadas */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
     width: 400px; /* Largura maior */
@@ -80,11 +80,10 @@
     backdrop-filter: blur(15px); /* Mantém o efeito Glassmorphism */
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     border-right: 1px solid rgba(255, 255, 255, 0.5);
-    gap: 20px;
-    max-width: 90%;
+    gap:10px;
+    max-width: 95%;
     max-height: 90vh;
     overflow-y: auto;
-    padding: 40px;
     animation: fadeIn 0.8s ease-out both;
     border: 1px solid rgba(255, 255, 255, 0.3); /* Borda sutil */
 }
@@ -118,7 +117,7 @@
     border-radius: 5px;
     background: #fff;
     border: none;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 
 .login-form .inputBox input:focus {
@@ -159,7 +158,7 @@
 .login-form .group{
     display: flex;
     justify-content: space-between;
-    gap: 10px; 
+    gap: 5px; 
 }
 
 .login-form .group a{
