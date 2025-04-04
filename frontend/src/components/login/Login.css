@@ -141,6 +141,10 @@
     font-weight: 500;
     transition: 0.5s;
     transition: background 0.3s ease;
+    align-items:center;
+    display: flex;
+    justify-content: center;
+    padding: 12px 20px;
 }
 
 .login-form .inputBox #btn:hover{
