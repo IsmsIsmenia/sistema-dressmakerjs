@@ -177,6 +177,24 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const getMe = async (req, res) => {
+  try {
+    const user = await Usuario.findByPk(req.userId, {
+      attributes: ['id', 'nome', 'email', 'tipo']
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar usuário.' });
+  }
+};
+
+
 module.exports = {
   registerUser,
   loginUser,
@@ -184,5 +202,6 @@ module.exports = {
   getUsers,
   getUserById,
   updateUser,
-  deleteUser
+  deleteUser,
+  getMe
 };

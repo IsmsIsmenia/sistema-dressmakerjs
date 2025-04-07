@@ -5,8 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import { InputIcon } from "../components/input";
-import { Mail, Lock } from "lucide-react";
+//import { Mail, Lock } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -59,7 +58,6 @@ const Login = () => {
         <div className="space-y-3">
           <div className="space-y-2">
             <div className="inputBox group gap-3 flex items-center">
-            <Mail className="icon" />
               <input flex-1
                 type="email"
                 value={email}

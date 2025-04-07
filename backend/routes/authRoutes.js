@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, loginUser, logoutUser } = require('../controllers/userController');
+const { registerUser, loginUser, logoutUser, getMe } = require('../controllers/userController');
 const authMiddleware = require('../middleware/authMiddleware');
 const bruteForceMiddleware = require('../middleware/bruteForce');
 const router = express.Router();
@@ -83,7 +83,7 @@ router.post('/login',bruteForceMiddleware, loginUser);
  *      401:
  *        description: Token inválido ou ausente.
  */
-router.get("/me", authMiddleware, (req, res) => {
+router.get("/me", authMiddleware, getMe, (req, res) => {
   res.json({
     id: req.userId,
     role: req.userRole

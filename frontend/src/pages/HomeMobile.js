@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import maquina_logo from "../assets/linha_mobile.png";
+import linha_logo from "../assets/linha_mobile.png";
+import maquina_logo from "../assets/maquina_icon.png";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
 export default function HomeMobile() {
   const { logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user } = useContext(AuthContext);
 
   // Função para abrir e fechar o menu
   const toggleMenu = () => {
@@ -63,10 +65,10 @@ export default function HomeMobile() {
           <h2 className="text-white text-lg font-semibold">Menu</h2>
 
           <nav className="mt-4 flex flex-col space-y-4 w-full">
-            <Link to="/pedidos" className="text-white text-lg flex items-center gap-2 hover:underline">📋 Pedidos</Link>
-            <Link to="/admin" className="text-white text-lg flex items-center gap-2 hover:underline">⚙️ Administração</Link>
-            <Link to="/estoque" className="text-white text-lg flex items-center gap-2 hover:underline">🧵 Estoque</Link>
-            <Link to="/agenda" className="text-white text-lg flex items-center gap-2 hover:underline">📅 Agenda</Link>
+            <Link to="/pedidos" className="text-white text-lg flex items-center gap-2 no-underline">📋 Pedidos</Link>
+            <Link to="/admin" className="text-white text-lg flex items-center gap-2 no-underline">⚙️ Administração</Link>
+            <Link to="/estoque" className="text-white text-lg flex items-center gap-2 no-underline">🧵 Estoque</Link>
+            <Link to="/agenda" className="text-white text-lg flex items-center gap-2 no-underline">📅 Agenda</Link>
           </nav>
 
           {/* Botão de Logout */}
@@ -96,13 +98,13 @@ export default function HomeMobile() {
         {/* Saudação */}
         <div className="bg-[#5D6952] w-full max-w-sm p-6 rounded-xl shadow-md flex items-center justify-between">
           <div className="text-left">
-            <h1 className="text-white text-2xl font-semibold">Olá, Julia! ✂️</h1>
+            <h1 className="text-white text-2xl font-semibold">Olá, {user.nome}!✂️</h1>
             <p className="text-[#E3E0D7] text-sm mt-2">
               Pronta para gerenciar sua costura com facilidade?
             </p>
           </div>
           <div className="w-24 h-19">
-            <img src={maquina_logo} alt="Ícone de costura" className="w-full h-full" />
+            <img src={linha_logo} alt="Ícone de costura" className="w-full h-full" />
           </div>
         </div>
 
