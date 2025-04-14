@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
-//import { Mail, Lock } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +14,11 @@ const Login = () => {
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
   const { login } = useContext(AuthContext); // Obtendo a função login do contexto
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+
+  const alternarVisibilidade = () => {
+    setMostrarSenha(!mostrarSenha);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -70,13 +75,23 @@ const Login = () => {
           </div>
           <div className="inputBox">
             <input
-              type="password"
+              id="senha"
+              type={mostrarSenha ? "text" : "password"}
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
               className="w-full px-4 py-2 mt-2 text-sm border-none rounded-lg"
               placeholder="Senha"
             />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={() => setMostrarSenha((prev) => !prev)}
+              aria-label="Mostrar senha"
+            >
+              {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+            
           </div>
           <div className="inputBox">
             <input type="submit" value="Login" id="btn" />
