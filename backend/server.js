@@ -11,7 +11,7 @@ const { Pedido } = require('./models/pedidosModel');
 const { Usuario } = require('./models/userModel');
 const pedidosRoutes = require('./routes/pedidosRoutes');
 const cookieParser = require('cookie-parser');
-
+const userRoutes = require('./routes/userRoutes')
 // Carregar variáveis de ambiente
 dotenv.config();
 
@@ -51,6 +51,7 @@ app.get('/serve', (req, res) => {
 });
 app.use('/auth', authRoutes);
 app.use('/pedidos', pedidosRoutes);
+app.use('/users', userRoutes);
 
 // Rota protegida de exemplo
 app.get('/protected', authMiddleware, (req, res) => {
