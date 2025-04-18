@@ -240,3 +240,7 @@
     align-items: center;
     justify-content: center;
 }
+.input-custom::placeholder {
+    color: #5D6952;
+    opacity: 1; /* garante que a cor apareça forte */
+  }

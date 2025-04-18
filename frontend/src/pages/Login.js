@@ -98,7 +98,7 @@ const Login = () => {
           </div>
           <div className="group">
             <a href="#">Esqueceu a Senha?</a>
-            <a href="#">Cadastre-se</a>
+            <a href="/cadastro">Cadastre-se</a>
           </div>
         </div>
         </form>
