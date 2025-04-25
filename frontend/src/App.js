@@ -13,6 +13,7 @@ const App = () => {
       <Routes>
         {/* Login será acessível em /login */}
         <Route path="/login" element={<Login />} />
+        <Route path="/cadastro" element={<CadastroUsuario />} />
 
         {/* Redireciona para /login por padrão */}
         <Route path="/" element={<Login />} />
@@ -21,7 +22,7 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path="/homemobile" element={<HomeMobile />} />
-          <Route path="/cadastro" element={<CadastroUsuario />} />
+          
         </Route>
       </Routes>
     </Router>

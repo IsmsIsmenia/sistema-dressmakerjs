@@ -2,11 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import "../components/login/Login.css";
 
-export default function CadastroUsuario() {
+export default function CadastroUsuario({ isAdmin = false }) {
 	const [form, setForm] = useState({
 		nome: "",
 		email: "",
 		senha: "",
+		tipo: "cliente", // default
 	});
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,7 +15,7 @@ export default function CadastroUsuario() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post("http://localhost:5000/users", form);
+			await axios.post("http://localhost:5000/auth/register", form);
 			alert("Usuário cadastrado com sucesso!");
 		} catch (error) {
 			console.error("Erro ao Cadastrar o usuário:", error);
@@ -57,6 +58,17 @@ export default function CadastroUsuario() {
 					onChange={handleChange}
 					className=" text-[#5D6952] text-md input-custom w-full mb-6 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#B3B796]"
 				/>
+				{isAdmin && (
+					<select
+						name="tipo"
+						value={form.tipo}
+						onChange={handleChange}
+						className="input-custom w-full mb-4 px-4 py-2 border border-gray-300 rounded"
+					>
+						<option value="cliente">Cliente</option>
+						<option value="admin">Admin</option>
+					</select>
+				)}
 
 				<button
 					type="submit"
