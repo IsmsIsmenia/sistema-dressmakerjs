@@ -3,6 +3,8 @@ import { useState } from "react";
 import "../components/login/Login.css";
 
 export default function CadastroUsuario({ isAdmin = false }) {
+	const [showAlert, setShowAlert] = useState(false);
+	const [erro, setErro] = useState("");
 	const [form, setForm] = useState({
 		nome: "",
 		email: "",
@@ -18,9 +20,10 @@ export default function CadastroUsuario({ isAdmin = false }) {
 			await axios.post("http://localhost:5000/auth/register", form);
 			alert("Usuário cadastrado com sucesso!");
 		} catch (error) {
-			console.error("Erro ao Cadastrar o usuário:", error);
-			alert("Erro ao cadastrar");
+			setErro("Erro ao Cadastrar o usuário:", error);
 		}
+		setShowAlert(true);
+		setTimeout(() => setShowAlert(false), 3000);
 	};
 	return (
 		<div className="login-background">
@@ -28,10 +31,16 @@ export default function CadastroUsuario({ isAdmin = false }) {
 				onSubmit={handleSubmit}
 				className="animate-fadeIn max-w-md mx-auto mt-10 px-8 py-10 bg-white/35 shadow-xl rounded-xl backdrop-blur-md"
 			>
+				
 				<h2 className="text-3xl font-semibold mb-6 text-[#5D6952] text-center">
 					Cadastre-se
 				</h2>
-
+				{showAlert && (
+					<div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm">
+						{erro}
+					</div>
+				)}
+				{/* inputs aqui */}
 				<input
 					type="text"
 					name="nome"

@@ -22,6 +22,7 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path="/homemobile" element={<HomeMobile />} />
+          <Route path="/admin/cadastro" element={<CadastroUsuario isAdmin={true} />}/>
           
         </Route>
       </Routes>
