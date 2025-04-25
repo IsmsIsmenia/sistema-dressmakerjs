@@ -102,15 +102,15 @@
 
 .login-form .inputBox {
     width: 100%;
-    display: flex;
+    display: block;
+    position:relative;
+    
     justify-content: center; /* Centraliza o botão horizontalmente */
 }
 
 .login-form .inputBox input{
-    position: relative;
     width: 100%;
-    padding: 15px 20px;
-    padding-left: 40px;
+    padding: 15px 45px 15px 20px;
     outline: none;
     font-size: 1.25em;
     color: #5D6952;
@@ -202,9 +202,10 @@
     position: relative;
     display: flex;
     align-items: center;
+    position:relative;
 }
 .inputBox .icon {
-    position: absolute;
+    position: relative;
     left: 15px;
     top: 50%;
     transform: translateY(-50%);

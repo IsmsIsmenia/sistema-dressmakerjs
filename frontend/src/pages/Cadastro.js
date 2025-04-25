@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import "../components/login/Login.css";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function CadastroUsuario({ isAdmin = false }) {
 	const [showAlert, setShowAlert] = useState(false);
+	const [showSuccessModal, setShowSuccessModal] = useState(false);
+	const [mostrarSenha, setMostrarSenha] = useState(false);
 	const [erro, setErro] = useState("");
 	const [form, setForm] = useState({
 		nome: "",
@@ -18,7 +21,7 @@ export default function CadastroUsuario({ isAdmin = false }) {
 		e.preventDefault();
 		try {
 			await axios.post("http://localhost:5000/auth/register", form);
-			alert("Usuário cadastrado com sucesso!");
+			setShowSuccessModal(true);
 		} catch (error) {
 			setErro("Erro ao Cadastrar o usuário:", error);
 		}
@@ -31,7 +34,6 @@ export default function CadastroUsuario({ isAdmin = false }) {
 				onSubmit={handleSubmit}
 				className="animate-fadeIn max-w-md mx-auto mt-10 px-8 py-10 bg-white/35 shadow-xl rounded-xl backdrop-blur-md"
 			>
-				
 				<h2 className="text-3xl font-semibold mb-6 text-[#5D6952] text-center">
 					Cadastre-se
 				</h2>
@@ -40,7 +42,6 @@ export default function CadastroUsuario({ isAdmin = false }) {
 						{erro}
 					</div>
 				)}
-				{/* inputs aqui */}
 				<input
 					type="text"
 					name="nome"
@@ -67,6 +68,14 @@ export default function CadastroUsuario({ isAdmin = false }) {
 					onChange={handleChange}
 					className=" text-[#5D6952] text-md input-custom w-full mb-6 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#B3B796]"
 				/>
+				<button
+					type="button"
+					className="toggle-password"
+					onClick={() => setMostrarSenha((prev) => !prev)}
+					aria-label="Mostrar senha"
+				>
+					{mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+				</button>
 				{isAdmin && (
 					<select
 						name="tipo"
@@ -86,6 +95,26 @@ export default function CadastroUsuario({ isAdmin = false }) {
 					Cadastrar
 				</button>
 			</form>
+			{showSuccessModal && (
+				<div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+					<div className="bg-white rounded-xl shadow-lg p-8 max-w-sm w-full">
+						<h3 className="text-lg font-semibold text-[#5D6952] mb-4">
+							Cadastro realizado com sucesso!
+						</h3>
+						<p className="text-sm text-gray-600 mb-6">
+							Você pode voltar para a tela de login agora.
+						</p>
+						<div className="flex justify-end gap-4">
+							<button
+								onClick={() => (window.location.href = "/login")}
+								className="bg-[#5D6952] text-white px-4 py-2 rounded hover:bg-[#849573]"
+							>
+								Ir para o Login
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

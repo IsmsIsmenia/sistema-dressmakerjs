@@ -73,14 +73,14 @@ const Login = () => {
               />
             </div>
           </div>
-          <div className="inputBox">
+          <div className="inputBox relative">
             <input
               id="senha"
               type={mostrarSenha ? "text" : "password"}
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 text-sm border-none rounded-lg"
+              className="w-full px-4 py-2 mt-2 text-sm pr-12 border-none rounded-lg"
               placeholder="Senha"
             />
             <button
