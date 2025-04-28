@@ -66,7 +66,7 @@ export default function CadastroUsuario({ isAdmin = false }) {
 					placeholder="Senha"
 					value={form.senha}
 					onChange={handleChange}
-					className=" text-[#5D6952] text-md input-custom w-full mb-6 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#B3B796]"
+					className=" text-[#5D6952] text-md input-custom w-full mb-6 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#B3B796] input-custom"
 				/>
 				<button
 					type="button"
@@ -88,12 +88,20 @@ export default function CadastroUsuario({ isAdmin = false }) {
 					</select>
 				)}
 
-				<button
-					type="submit"
-					className=" bg-[#5D6952] text-white font-bold py-2 px-4 rounded w-full transition duration-200 ease-in-out hover:bg-[#849573] hover:scale-105"
-				>
-					Cadastrar
-				</button>
+				<div className="sm:flex-row-reverse">
+					<button
+						type="button"
+						className=" bg-[#909888] text-white font-bold py-2 px-6 rounded w-1/2 transition duration-200 ease-in-out hover:bg-[#a8b79a] hover:scale-105 "
+					>
+						Voltar
+					</button>
+					<button
+						type="submit"
+						className=" bg-[#5D6952] text-white font-bold py-2 px-4 rounded w-1/2 transition duration-200 ease-in-out hover:bg-[#849573] hover:scale-105 gap-15"
+					>
+						Cadastrar
+					</button>
+				</div>
 			</form>
 			{showSuccessModal && (
 				<div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
