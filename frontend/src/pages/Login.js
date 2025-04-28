@@ -73,14 +73,15 @@ const Login = () => {
               />
             </div>
           </div>
-          <div className="inputBox relative">
+          <div className="inputBox">
             <input
               id="senha"
               type={mostrarSenha ? "text" : "password"}
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 text-sm pr-12 border-none rounded-lg"
+              maxLength={30}
+              className="w-full px-4 py-2 mt-2 text-sm pr-12 border-none rounded-lg input-custom"
               placeholder="Senha"
             />
             <button
@@ -89,7 +90,7 @@ const Login = () => {
               onClick={() => setMostrarSenha((prev) => !prev)}
               aria-label="Mostrar senha"
             >
-              {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+              {mostrarSenha ? <EyeOff size={22} /> : <Eye size={22} />}
             </button>
             
           </div>

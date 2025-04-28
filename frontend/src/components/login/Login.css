@@ -68,6 +68,11 @@
         margin-top: 5px; /* Espaço entre os links */
         font-size: 0.85em;
     }
+    input[type="password"] {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
 }
 .login-form {
     background-color: rgba(255, 255, 255, 0.35); /* Transparência com fundo branco */
@@ -110,7 +115,7 @@
 
 .login-form .inputBox input{
     width: 100%;
-    padding: 15px 45px 15px 20px;
+    padding: 15px 60px 15px 20px;
     outline: none;
     font-size: 1.25em;
     color: #5D6952;
@@ -202,7 +207,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    position:relative;
 }
 .inputBox .icon {
     position: relative;
@@ -229,10 +233,10 @@
 /* Botão de mostrar/ocultar senha */
 .toggle-password {
     position: absolute;
-    right: 15px;
+    right: 5px;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
+    background: tranparent;
     border: none;
     cursor: pointer;
     color: #5D6952;
@@ -244,4 +248,9 @@
 .input-custom::placeholder {
     color: #5D6952;
     opacity: 1; /* garante que a cor apareça forte */
+  }
+
+.input[type="password"] {
+    width: 100%;
+    padding-right: 40px; /* espaço para o botão de mostrar/ocultar */
   }
