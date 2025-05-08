@@ -98,13 +98,13 @@ export default function CadastroUsuario({ isAdmin = false }) {
 					<button
 						type="button"
 						onClick={() => navigate(-1)}
-						className=" bg-[#909888] text-white font-bold py-2 px-6 rounded flex-1 transition duration-200 ease-in-out hover:bg-[#a8b79a] hover:scale-105 "
+						className=" bg-[#909888] text-white font-bold py-2 px-6 rounded w-1/3 transition duration-200 ease-in-out hover:bg-[#a8b79a] hover:scale-105 "
 					>
 						Voltar
 					</button>
 					<button
 						type="submit"
-						className=" bg-[#5D6952] text-white font-bold py-2 px-4 rounded flex-1 transition duration-200 ease-in-out hover:bg-[#849573] hover:scale-105"
+						className=" bg-[#5D6952] text-white font-bold py-2 px-4 rounded w-2/3 transition duration-200 ease-in-out hover:bg-[#849573] hover:scale-105"
 					>
 						Cadastrar
 					</button>
