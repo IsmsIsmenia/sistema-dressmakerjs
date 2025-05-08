@@ -2,8 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import "../components/login/Login.css";
 import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function CadastroUsuario({ isAdmin = false }) {
+	const navigate = useNavigate();
 	const [showAlert, setShowAlert] = useState(false);
 	const [showSuccessModal, setShowSuccessModal] = useState(false);
 	const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -60,22 +63,25 @@ export default function CadastroUsuario({ isAdmin = false }) {
 					className=" text-[#5D6952] text-md input-custom w-full mb-4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#B3B796]"
 				/>
 
-				<input
-					type="password"
-					name="senha"
-					placeholder="Senha"
-					value={form.senha}
-					onChange={handleChange}
-					className=" text-[#5D6952] text-md input-custom w-full mb-6 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#B3B796] input-custom"
-				/>
-				<button
-					type="button"
-					className="toggle-password"
-					onClick={() => setMostrarSenha((prev) => !prev)}
-					aria-label="Mostrar senha"
-				>
-					{mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
-				</button>
+				<div className="relative mb-6">
+					<input
+						type={mostrarSenha ? "text" : "password"}
+						name="senha"
+						placeholder="Senha"
+						value={form.senha}
+						onChange={handleChange}
+						className="text-[#5D6952] text-md input-custom w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#B3B796]"
+					/>
+					<button
+						type="button"
+						onClick={() => setMostrarSenha((prev) => !prev)}
+						aria-label="Mostrar senha"
+						className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#5D6952]"
+					>
+						{mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+					</button>
+				</div>
+
 				{isAdmin && (
 					<select
 						name="tipo"
@@ -88,16 +94,17 @@ export default function CadastroUsuario({ isAdmin = false }) {
 					</select>
 				)}
 
-				<div className="sm:flex-row-reverse">
+				<div className="flex justify-between gap-4 mt-4">
 					<button
 						type="button"
-						className=" bg-[#909888] text-white font-bold py-2 px-6 rounded w-1/2 transition duration-200 ease-in-out hover:bg-[#a8b79a] hover:scale-105 "
+						onClick={() => navigate(-1)}
+						className=" bg-[#909888] text-white font-bold py-2 px-6 rounded flex-1 transition duration-200 ease-in-out hover:bg-[#a8b79a] hover:scale-105 "
 					>
 						Voltar
 					</button>
 					<button
 						type="submit"
-						className=" bg-[#5D6952] text-white font-bold py-2 px-4 rounded w-1/2 transition duration-200 ease-in-out hover:bg-[#849573] hover:scale-105 gap-15"
+						className=" bg-[#5D6952] text-white font-bold py-2 px-4 rounded flex-1 transition duration-200 ease-in-out hover:bg-[#849573] hover:scale-105"
 					>
 						Cadastrar
 					</button>
