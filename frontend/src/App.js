@@ -5,7 +5,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Home from "./components/Home";
 import HomeMobile from './pages/HomeMobile.js';
 import CadastroUsuario from './pages/Cadastro.js';
-
+import Administracao from './pages/Administração.js'
 
 const App = () => {
   return (
@@ -22,6 +22,7 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path="/homemobile" element={<HomeMobile />} />
+          <Route path="/adminmobile" element={<Administracao />} />
           <Route path="/admin/cadastro" element={<CadastroUsuario isAdmin={true} />}/>
           
         </Route>

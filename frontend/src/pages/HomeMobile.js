@@ -113,7 +113,7 @@ export default function HomeMobile() {
           <Link to="/pedidos" className="bg-[#564529] text-white py-4 rounded-lg text-center text-lg font-semibold shadow-md hover:bg-[#8e764f] transition duration-300 transform hover:scale-105 focus:scale-105 active:scale-100 no-underline">
             📋 Pedidos
           </Link>
-          <Link to="/admin" className="bg-[#5D6952] text-white py-4 rounded-lg text-center text-lg font-semibold shadow-md hover:bg-[#3f673a] transition duration-300 transform hover:scale-105 focus:scale-105 active:scale-100 no-underline">
+          <Link to="/adminmobile" className="bg-[#5D6952] text-white py-4 rounded-lg text-center text-lg font-semibold shadow-md hover:bg-[#3f673a] transition duration-300 transform hover:scale-105 focus:scale-105 active:scale-100 no-underline">
             ⚙️ Administração
           </Link>
           <Link to="/estoque" className="bg-[#CCAC85] text-white py-4 rounded-lg text-center text-lg font-semibold shadow-md hover:bg-[#c7b08a] transition duration-300 transform hover:scale-105 focus:scale-105 active:scale-100 no-underline">
