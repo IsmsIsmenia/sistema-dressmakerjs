@@ -35,13 +35,13 @@ export default function UsuariosAdmin() {
 						☰ Menu
 					</button>
 
-					<h1 className="text-lg font-semibold leading-none">Administração</h1>
+					<h1 className="text-xl font-semibold leading-none">Administração</h1>
 				</div>
 			</header>
 
 			{/* Conteúdo */}
-			<main className="max-w-4xl mx-auto p-4">
-				<div className="flex justify-between items-center mb-4 mt-4">
+			<main className="max-w-6xl mx-auto p-4 px-8">
+				<div className="flex justify-between items-center mb-6 mt-4">
 					<h2 className="text-xl font-bold text-[#5D6952]">Usuários</h2>
 					<button className="flex items-center gap-2 bg-[#5D6952] text-white px-3 py-1 rounded hover:bg-[#849573]">
 						<PlusCircle size={18} /> Novo Usuário
@@ -55,19 +55,19 @@ export default function UsuariosAdmin() {
 							className="bg-white rounded shadow p-3 flex justify-between items-center"
 						>
 							<div>
-								<p className="text-sm font-semibold text-[#5D6952]">
+								<p className="text-md font-semibold text-[#5D6952]">
 									{usuario.nome}
 								</p>
-								<p className="text-xs text-gray-600 capitalize">
+								<p className="text-sm text-gray-600 capitalize">
 									{usuario.tipo}
 								</p>
 							</div>
-							<div className="flex gap-2">
+							<div className="flex gap-3 items-center">
 								<button className="text-blue-600 hover:text-blue-800">
-									<Edit size={18} />
+									<Edit size={20} />
 								</button>
 								<button className="text-red-600 hover:text-red-800">
-									<Trash size={18} />
+									<Trash size={20} />
 								</button>
 							</div>
 						</div>
