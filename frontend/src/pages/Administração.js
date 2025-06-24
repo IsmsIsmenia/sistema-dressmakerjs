@@ -1,13 +1,48 @@
 import { Edit, PlusCircle, Trash } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SidebarMenuMobile from "../components/SidebarMenuMobile";
+import AuthContext from "../context/AuthContext";
+import SidebarMenuDesktop from "../components/SidebarMenuDesktop";
 
 
 export default function UsuariosAdmin() {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const { user } = useContext(AuthContext);
+
+	// Função para abrir e fechar o menu
 	const toggleMenu = () => {
 		setMenuOpen(!menuOpen);
 	};
+
+	// Fecha o menu ao clicar fora dele
+	const handleClickOutside = (event) => {
+		if (menuOpen && !event.target.closest(".sidebar")) {
+			setMenuOpen(false);
+		}
+	};
+
+	// Fecha o menu ao pressionar "Esc"
+	const handleKeyDown = (event) => {
+		if (event.key === "Escape") {
+			setMenuOpen(false);
+		}
+	};
+
+	// Adiciona e remove os event listeners
+	useEffect(() => {
+		if (menuOpen) {
+			document.addEventListener("mousedown", handleClickOutside);
+			document.addEventListener("keydown", handleKeyDown);
+		} else {
+			document.removeEventListener("mousedown", handleClickOutside);
+			document.removeEventListener("keydown", handleKeyDown);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+			document.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [menuOpen]);
 	const usuarios = [
 		{
 			id: 1,
@@ -28,7 +63,7 @@ export default function UsuariosAdmin() {
 			{/* Sidebar */}
 			<aside className="hidden md:block bg-[#5D6952] w-64 px-4 py-6">
 				<h2 className="text-white text-xl font-semibold mb-4">Menu</h2>
-				<SidebarMenuMobile />
+				<SidebarMenuDesktop />
 			</aside>
 
 			{/* Conteúdo principal */}
@@ -44,6 +79,7 @@ export default function UsuariosAdmin() {
 						>
 							☰ Menu
 						</button>
+						<SidebarMenuMobile menuOpen={menuOpen} toggleMenu={toggleMenu} />
 						<h1 className="text-xl font-semibold">Administração</h1>
 					</div>
 				</header>
