@@ -15,7 +15,7 @@ export default function CadastroUsuario({ isAdmin = false }) {
 		nome: "",
 		email: "",
 		senha: "",
-		tipo: "cliente", // default
+		tipo: "", // default
 	});
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
@@ -83,15 +83,33 @@ export default function CadastroUsuario({ isAdmin = false }) {
 				</div>
 
 				{isAdmin && (
-					<select
+					<div className="relative mb-6">
+						<select
 						name="tipo"
 						value={form.tipo}
 						onChange={handleChange}
-						className="input-custom w-full mb-4 px-4 py-2 border border-gray-300 rounded"
+						className="block w-full appearance-none bg-white border border-[#849573] text-[#333] py-2 pl-4 pr-10 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-[#849573] "
+						defaultValue=""
 					>
+						<option value="" disabled hidden>Selecione um cargo</option>
 						<option value="cliente">Cliente</option>
 						<option value="admin">Admin</option>
 					</select>
+					<div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-[#849573]">
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
+					
+
+					</div>
+					
+					
 				)}
 
 				<div className="flex justify-between gap-4 mt-4">

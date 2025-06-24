@@ -3,9 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import SidebarMenuMobile from "../components/SidebarMenuMobile";
 import AuthContext from "../context/AuthContext";
 import SidebarMenuDesktop from "../components/SidebarMenuDesktop";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function UsuariosAdmin() {
+	const navigate = useNavigate();
 	const [menuOpen, setMenuOpen] = useState(false);
 	const { user } = useContext(AuthContext);
 
@@ -87,7 +90,9 @@ export default function UsuariosAdmin() {
 				<main className="p-6">
 					<div className="flex justify-between items-center mb-6">
 						<h2 className="text-xl font-bold text-[#5D6952]">Usuários</h2>
-						<button className="flex items-center gap-2 bg-[#5D6952] text-white px-3 py-1 rounded hover:bg-[#849573]">
+						<button
+						 onClick={() => navigate("/admin/cadastro")}
+						 className="flex items-center gap-2 bg-[#5D6952] text-white px-3 py-1 rounded hover:bg-[#849573]">
 							<PlusCircle size={18} /> Novo Usuário
 						</button>
 					</div>
