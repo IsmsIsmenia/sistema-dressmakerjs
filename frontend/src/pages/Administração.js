@@ -4,6 +4,7 @@ import SidebarMenuMobile from "../components/SidebarMenuMobile";
 import AuthContext from "../context/AuthContext";
 import SidebarMenuDesktop from "../components/SidebarMenuDesktop";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 
@@ -46,20 +47,23 @@ export default function UsuariosAdmin() {
 			document.removeEventListener("keydown", handleKeyDown);
 		};
 	}, [menuOpen]);
-	const usuarios = [
-		{
-			id: 1,
-			nome: "Maria Souza",
-			tipo: "admin",
-			email: "julia.sales@example.com",
-		},
-		{
-			id: 2,
-			nome: "João Andrade",
-			tipo: "cliente",
-			email: "julia.sales@example.com",
-		},
-	];
+
+	useEffect(() => {
+		const fetchUsuarios = async () => {
+			try {
+				const response = await axios.get("http://localhost:5000/users",{
+					withCredentials: true,
+				});
+				setUsuarios(response.data);
+			} catch (err) {
+				console.error("Error ao buscar usuários", err);
+			}
+		};
+		fetchUsuarios();
+	}, [user])
+
+
+	const [usuarios, setUsuarios] = useState([]);
 
 	return (
 		<div className="min-h-screen bg-[#E3E0D7] flex">
